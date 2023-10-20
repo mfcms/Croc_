@@ -1,6 +1,6 @@
 package src.Lab1;
 //Вывести числа от 1 до 100, вместо кратным 3 fizz, вместо кратным 5 buzz
-public class Lab1_2 {
+public class Task2 {
     public static void main(String[] args){
         for (int i = 1; i <= 100;i++){
             check(i);

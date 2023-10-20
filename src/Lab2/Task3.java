@@ -1,6 +1,7 @@
+package src.Lab2;
 import java.util.Scanner;
-
-public class Lab2_1_1 {
+//проверка на то, является ли число простым и является ли числ близнецом
+public class Task3 {
     
     public static void main(String[] args) {
 
