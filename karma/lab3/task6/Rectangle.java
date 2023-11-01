@@ -36,11 +36,11 @@ public class Rectangle extends Figure implements Movable {
 
     @Override
     public String toString() {
-        return getType() + "(" + x1 + "," + y1 + "), (" + x2 + "," + y2 + "):";
+        return getType() + " (" + x1 + "," + y1 + "), (" + x2 + "," + y2 + ")";
     }
 
     @Override
-    public boolean contpoint(int x, int y) {
+    public boolean containsPoint(int x, int y) {
         return (x >= x1) && (y >= y1) && (x <= x2) && (y >= y2);
     }
 

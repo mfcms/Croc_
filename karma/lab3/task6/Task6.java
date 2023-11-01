@@ -12,7 +12,7 @@ public class Task6 {
                             "Car",
                             new Rectangle(1, 2, 3, 4)));
             System.out.println(example.findByPoint(2, 3));
-            System.out.println(example.findByLabel("tree"));
+            System.out.println(example.findByLabel("ar"));
         }
     }
 }

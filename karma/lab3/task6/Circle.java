@@ -3,12 +3,12 @@ package karma.lab3.task6;
 public class Circle extends Figure implements Movable {
     private int x;
     private int y;
-    private int rad;
+    private int radius;
 
-    public Circle(int x, int y, int rad) {
+    public Circle(int x, int y, int radius) {
         this.x = x;
         this.y = y;
-        this.rad = rad;
+        this.radius = radius;
     }
 
     public int getX() {
@@ -19,8 +19,8 @@ public class Circle extends Figure implements Movable {
         return y;
     }
 
-    public int getrad() {
-        return rad;
+    public int getRadius() {
+        return radius;
     }
 
     @Override
@@ -30,14 +30,14 @@ public class Circle extends Figure implements Movable {
 
     @Override
     public String toString() {
-        return getType() + "(" + x + "," + y + "), (" + rad + "): ";
+        return getType() + " (" + x + "," + y + "), (" + radius + ")";
     }
 
     @Override
-    public boolean contpoint(int x, int y) {
+    public boolean containsPoint(int x, int y) {
         var dx = x - this.x;
         var dy = y - this.y;
-        return dx * dx + dy * dy <= this.rad * this.rad;
+        return dx * dx + dy * dy <= this.radius * this.radius;
     }
 
     @Override
@@ -45,5 +45,4 @@ public class Circle extends Figure implements Movable {
         x += dx;
         y += dy;
     }
-
 }

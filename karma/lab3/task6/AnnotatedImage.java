@@ -20,7 +20,7 @@ public class AnnotatedImage {
 
     Annotation findByPoint(int x, int y) {
         for (Annotation annotation : annotations) {
-            if (annotation.contpoint(x, y)) {
+            if (annotation.containsPoint(x, y)) {
                 return annotation;
             }
         }
@@ -29,7 +29,7 @@ public class AnnotatedImage {
 
     Annotation findByLabel(String label) {
         for (Annotation annotation : annotations) {
-            if (annotation.contStr(label)) {
+            if (annotation.getLabel().contains(label)) {
                 return annotation;
             }
         }

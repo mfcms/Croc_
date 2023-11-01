@@ -17,12 +17,8 @@ public class Annotation {
         return figure;
     }
 
-    public boolean contpoint(int x, int y) {
-        return figure.contpoint(x, y);
-    }
-
-    public boolean contStr(String str) {
-        return label.contains(str);
+    public boolean containsPoint(int x, int y) {
+        return figure.containsPoint(x, y);
     }
 
     @Override
