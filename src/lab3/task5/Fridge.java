@@ -1,11 +1,12 @@
-package src.Lab3.Taask5;
+package src.lab3.task5;
 
-import java.util.Set;
+import java.math.BigDecimal;
 
-class Fridge extends Product {
-    private boolean freez;//есть ли морозилка
-    private double FrTemp;//температура
-    public Fridge(String name, double price, String desc, int power, boolean freez, double FrTemp) {
+public class Fridge extends Product {
+    private boolean freez;// есть ли морозилка
+    private double FrTemp;// температура
+
+    public Fridge(String name, BigDecimal price, String desc, int power, boolean freez, double FrTemp) {
         super(name, price, desc, power);
         this.freez = freez;
         this.FrTemp = FrTemp;
@@ -34,4 +35,3 @@ class Fridge extends Product {
         System.out.println("Freezer Temperature: " + FrTemp + "°C");
     }
 }
-    

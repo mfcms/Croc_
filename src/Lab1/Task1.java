@@ -1,8 +1,8 @@
-package src.Lab1;
+package src.lab1;
+
 //простой вывод hello
 public class Task1 {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println("Hello, java ^^");
     }
-    
 }

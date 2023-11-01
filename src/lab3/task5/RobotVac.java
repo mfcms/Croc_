@@ -1,11 +1,14 @@
-package src.Lab3.Taask5;
+package src.lab3.task5;
+
+import java.math.BigDecimal;
 
 public class RobotVac extends Product {
-    public RobotVac(String name, double price, String desc, int power, int battery) {
+    public RobotVac(String name, BigDecimal price, String desc, int power, int battery) {
         super(name, price, desc, power);
+        this.battery = battery;
     }
 
-    private int battery;//время работы батареи в минутах
+    private int battery;// время работы батареи в минутах
 
     public int getBatteryRuntime() {
         return battery;

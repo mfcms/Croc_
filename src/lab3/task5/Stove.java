@@ -1,11 +1,14 @@
-package src.Lab3.Taask5;
+package src.lab3.task5;
 
-class Stove extends Product {
+import java.math.BigDecimal;
 
-    public Stove(String name, double price, String desc, int power, String fuel) {
+public class Stove extends Product {
+
+    public Stove(String name, BigDecimal price, String desc, int power, String fuel) {
         super(name, price, desc, power);
     }
-    private String fuel;//тиип плиты(газовая, элкетрическая, индукционная)
+
+    private String fuel;// тиип плиты(газовая, элкетрическая, индукционная)
 
     public String getFuelType() {
         return fuel;
@@ -21,6 +24,4 @@ class Stove extends Product {
         System.out.println("Fuel Type: " + fuel);
     }
 
-
-    
 }
