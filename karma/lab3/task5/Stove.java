@@ -4,24 +4,24 @@ import java.math.BigDecimal;
 
 public class Stove extends Product {
 
-    public Stove(String name, BigDecimal price, String desc, int power, String fuel) {
-        super(name, price, desc, power);
+    public Stove(String name, BigDecimal price, String description, int power, String fuelType) {
+        super(name, price, description, power);
+        this.fuelType = fuelType;
     }
 
-    private String fuel;// тиип плиты(газовая, элкетрическая, индукционная)
+    private String fuelType; // тип плиты (газовая, элкетрическая, индукционная)
 
     public String getFuelType() {
-        return fuel;
+        return fuelType;
     }
 
     public void setFuelType(String fuel) {
-        this.fuel = fuel;
+        this.fuelType = fuel;
     }
 
     @Override
-    public void Charact() {
-        super.Charact();
-        System.out.println("Fuel Type: " + fuel);
+    public void printFullDescription() {
+        super.printFullDescription();
+        System.out.println("Fuel Type: " + fuelType);
     }
-
 }

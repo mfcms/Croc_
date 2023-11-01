@@ -2,12 +2,11 @@ package karma.lab3.task5;
 
 import java.math.BigDecimal;
 
-public class ImportedFridge extends Fridge {
+public class ImportedStove extends Stove {
 
-    public ImportedFridge(String name, BigDecimal price, String description, int power, boolean hasFreezer,
-            double temperature,
-            boolean guarantee, String country) {
-        super(name, price, description, power, hasFreezer, temperature);
+    public ImportedStove(String name, BigDecimal price, String description, int power, String fuel, boolean guarantee,
+            String country) {
+        super(name, price, description, power, fuel);
         this.guarantee = guarantee;
         this.country = country;
     }
@@ -37,5 +36,4 @@ public class ImportedFridge extends Fridge {
         System.out.println("Guarantee: " + guarantee);
         System.out.println("Country: " + country);
     }
-
 }

@@ -2,9 +2,9 @@ package karma.lab3.task5;
 
 public interface Import {
 
-    void getGuar();
+    void getGuarantee();
 
-    void setGuar(boolean Gaur);
+    void setGuarantee(boolean guarantee);
 
     void setCountry(String country);
 
