@@ -13,6 +13,12 @@ public class Task6 {
                             new Rectangle(1, 2, 3, 4)));
             System.out.println(example.findByPoint(2, 3));
             System.out.println(example.findByLabel("ar"));
+
+            if (example.findByLabel("Car").getFigure() instanceof Movable movable) {
+                movable.move(10, 10);
+            }
+            
+            System.out.println(example.findByLabel("ar"));
         }
     }
 }

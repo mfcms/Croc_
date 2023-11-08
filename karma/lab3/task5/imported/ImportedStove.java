@@ -1,8 +1,11 @@
-package karma.lab3.task5;
+package karma.lab3.task5.imported;
 
 import java.math.BigDecimal;
 
-public class ImportedStove extends Stove {
+import karma.lab3.task5.Import;
+import karma.lab3.task5.nonimported.Stove;
+
+public class ImportedStove extends Stove implements Import {
 
     public ImportedStove(String name, BigDecimal price, String description, int power, String fuel, boolean guarantee,
             String country) {
@@ -22,11 +25,11 @@ public class ImportedStove extends Stove {
         return guarantee;
     }
 
-    void setCountry(String country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 
-    String getCountry() {
+    public String getCountry() {
         return country;
     }
 

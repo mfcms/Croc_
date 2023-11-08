@@ -1,6 +1,8 @@
-package karma.lab3.task5;
+package karma.lab3.task5.nonimported;
 
 import java.math.BigDecimal;
+
+import karma.lab3.task5.Product;
 
 public class RobotVac extends Product {
     public RobotVac(String name, BigDecimal price, String description, int power, int batteryRuntime) {

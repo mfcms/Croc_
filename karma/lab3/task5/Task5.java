@@ -2,6 +2,11 @@ package karma.lab3.task5;
 
 import java.math.BigDecimal;
 
+import karma.lab3.task5.imported.ImportedRobotVac;
+import karma.lab3.task5.nonimported.Fridge;
+import karma.lab3.task5.nonimported.RobotVac;
+import karma.lab3.task5.nonimported.Stove;
+
 public class Task5 {
     public class Main {
         public static void main(String[] args) {
@@ -19,6 +24,12 @@ public class Task5 {
             for (Product product : products) {
                 product.printFullDescription();
                 System.out.println();
+            }
+
+            for (Product product : products) {
+                if (product instanceof Import imported){
+                    System.out.println(product.getName() + " импортирован из " + imported.getCountry());
+                }
             }
         }
     }

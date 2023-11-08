@@ -1,11 +1,10 @@
 package karma.lab4.task7;
 
-import java.time.LocalDateTime;
 
-import karma.lab3.task5.Fridge;
 import karma.lab3.task5.Product;
-import karma.lab3.task5.RobotVac;
-import karma.lab3.task5.Stove;
+import karma.lab3.task5.nonimported.Fridge;
+import karma.lab3.task5.nonimported.RobotVac;
+import karma.lab3.task5.nonimported.Stove;
 
 import java.math.BigDecimal;
 
@@ -18,13 +17,17 @@ public class Task7 {
                     "An autonomous vacuum cleaner with smart features", 220, 120);
             Product[] products = { fridge, stove, robot };
 
-            Order order1 = new Order("Matt Smith", "9216289764", LocalDateTime.of(2023, 10, 25, 15, 30, 12),
-                    LocalDateTime.of(2023, 10, 26, 15, 30, 40),
-                    LocalDateTime.of(2023, 10, 27, 10, 45, 20),
-                    products);
+            Order order1 = new Order("Matt Smith", "9216289764", products);
+
 
             System.out.println(order1.getOrderNumber());
-            System.out.println(order1.checkOrder(LocalDateTime.of(2023,11,1,10,20,11)));
+            System.out.println(order1.checkOrder());
+            order1.toCollect();
+            System.out.println(order1.createNotification());
+            // LocalDateTime.of(2023, 10, 25, 15, 30, 12),
+            // LocalDateTime.of(2023, 10, 26, 15, 30, 40),
+            // LocalDateTime.of(2023, 10, 27, 10, 45, 20),
+            // LocalDateTime.of(2023,11,1,10,20,11)
         }
     }
 }

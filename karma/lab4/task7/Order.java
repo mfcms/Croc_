@@ -11,20 +11,18 @@ public class Order implements Checkable, Notification, WorkPanel {
     private String clientName;// имя заказчика
     private Product[] products;// массив товаров в корзине
 
-    public LocalDateTime createdAt; // дата создания заказа
-    private LocalDateTime collectedAt; // дата поступления
-    private LocalDateTime assembledAt; // дата сборки
+    public LocalDateTime createdAt; // дата поступления заказа
+    private LocalDateTime collectedAt; // дата сборки заказа
     private LocalDateTime receivedAt; // дата получения
 
     private OrderStatus status;// статус заказа
 
-    public Order(String clientName, String clientPhone, LocalDateTime collectedAt, LocalDateTime assembledAt, LocalDateTime receivedAt,
-            Product[] products) {
+    public Order(String clientName, String clientPhone, Product[] products) {
+        this.clientName = clientName;
         this.clientPhone = clientPhone;
-        this.collectedAt = collectedAt;
-        this.assembledAt = assembledAt;
-        this.receivedAt = receivedAt;
+        this.createdAt = LocalDateTime.now();
         this.products = products;
+        this.status = OrderStatus.CREATED;
     }
 
     public String getClientName() {
@@ -47,28 +45,32 @@ public class Order implements Checkable, Notification, WorkPanel {
         return clientPhone;
     }
 
-    public void setReceivedAt(LocalDateTime receiv) {
-        this.receivedAt = receiv;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setReceivedAt(LocalDateTime receivedAt) {
+        this.receivedAt = receivedAt;
     }
 
     public LocalDateTime getReceivedAt() {
         return receivedAt;
     }
 
-    public void setAssembledAt(LocalDateTime assemb) {
-        this.assembledAt = assemb;
-    }
-
-    public LocalDateTime getAssembledAt() {
-        return assembledAt;
-    }
-
-    public void setCollectedAt(LocalDateTime admiss) {
-        this.collectedAt = admiss;
+    public void setCollectedAt(LocalDateTime collectedAt) {
+        this.collectedAt = collectedAt;
     }
 
     public LocalDateTime getCollectedAt() {
         return collectedAt;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
     }
 
     public String getOrderNumber() {
@@ -82,52 +84,78 @@ public class Order implements Checkable, Notification, WorkPanel {
     }
 
     @Override
-    public boolean checkOrder(LocalDateTime assemb) throws Exception {
-        if (LocalDateTime.now().isBefore(assemb)) {
+    public boolean checkOrder() throws Exception {
+        switch (status) {
+            case CREATED:
+                return false;
+
+        
+            default:
+                break;
+        }
+        if (LocalDateTime.now().isBefore(collectedAt)) {
             return false;
-        } else if (LocalDateTime.now().isAfter(assemb) && LocalDateTime.now().isBefore(assemb.plusWeeks(2))) {
+        } else if (LocalDateTime.now().isAfter(collectedAt) && LocalDateTime.now().isBefore(collectedAt.plusWeeks(2))) {
             return true;
         } else {
             throw new Exception();
         }
     }
 
-    public BigDecimal summOfOrder(Product[] product) {
-        BigDecimal summ = new BigDecimal(0);
-        for (Product product2 : product) {
+    public BigDecimal getTotalCost() {
+        BigDecimal summ = new BigDecimal("0");//сумма выходит 0, пока не понимаю почему
+        for (Product product2 : products) {
             summ.add(product2.getPrice());
         }
         return summ;
     }
 
-    @Override
-    public String sensNotification(String name, Product[] product, LocalDateTime assemb) {
-        String list = product.toString();
-        String date = assemb.plusWeeks(2).toString();
-        String price = summOfOrder(product).toString();
-        return String.format(
-                "Уважаемый %s !\n Рады сообщить, что ваш заказ %s готов к выдаче /n Сумма к оплате: %s /n срок хранения заказа %s /n С наилучшими пожеланиями, магазин Кошки и картошки",
-                name, this.getOrderNumber(), list, price, date);
+    public String createList(){
+        String list = "";
+        for (Product product : products) {
+        list+=product.getName()+", ";
+        }
+        return list;
     }
 
     @Override
-    public void toCollect(OrderStatus status) {
+    public String createNotification() {
+        final String notificationFormat = "Уважаемый %s!" +
+                "\n\nРады сообщить, что ваш заказ %s готов к выдаче." +
+                "\n\nСостав заказа:\n%s" +
+                "\n\n\nСумма к оплате: %s" +
+                "\n\nСрок хранения заказа %s." +
+                "\n\n\nС наилучшими пожеланиями, магазин Кошки и картошки\"";
+
+        String list = createList();
+        String price = getTotalCost().toString();
+        String date = collectedAt.plusWeeks(2).toString();
+        return String.format(notificationFormat,
+                clientName, getOrderNumber(), list, price, date);
+    }
+
+    @Override
+    public void toCollect() {
         if (this.status == OrderStatus.CREATED) {
             status = OrderStatus.COLLECTED;
+            collectedAt = LocalDateTime.now();
         }
     }
 
     @Override
-    public void toGive(OrderStatus status, LocalDateTime assemb) {
-        if ((this.status == OrderStatus.COLLECTED) && (LocalDateTime.now().isBefore(assemb.plusWeeks(2)))) {
+    public void toGive() {
+        if (this.status == OrderStatus.COLLECTED && !hasExpired()) {
             status = OrderStatus.CLOSED;
+
         }
     }
 
     @Override
-    public void toExpire(OrderStatus status, LocalDateTime assemb) {
-        if ((this.status == OrderStatus.COLLECTED) && (LocalDateTime.now().isAfter(assemb.plusWeeks(2)))) {
+    public boolean hasExpired() {
+        if (this.status == OrderStatus.COLLECTED
+            && LocalDateTime.now().isAfter(collectedAt.plusWeeks(2))) {
             status = OrderStatus.EXPIRED;
         }
+        return this.status == OrderStatus.EXPIRED;
     }
 }

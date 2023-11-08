@@ -2,7 +2,7 @@ package karma.lab3.task5;
 
 public interface Import {
 
-    void getGuarantee();
+    boolean getGuarantee();
 
     void setGuarantee(boolean guarantee);
 

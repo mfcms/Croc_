@@ -1,6 +1,8 @@
-package karma.lab3.task5;
+package karma.lab3.task5.nonimported;
 
 import java.math.BigDecimal;
+
+import karma.lab3.task5.Product;
 
 public class Stove extends Product {
 
