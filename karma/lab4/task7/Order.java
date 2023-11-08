@@ -23,6 +23,7 @@ public class Order implements Checkable, Notification, WorkPanel {
         this.createdAt = LocalDateTime.now();
         this.products = products;
         this.status = OrderStatus.CREATED;
+        
     }
 
     public String getClientName() {
@@ -103,9 +104,9 @@ public class Order implements Checkable, Notification, WorkPanel {
     }
 
     public BigDecimal getTotalCost() {
-        BigDecimal summ = new BigDecimal("0");//сумма выходит 0, пока не понимаю почему
+        BigDecimal summ = new BigDecimal("0");
         for (Product product2 : products) {
-            summ.add(product2.getPrice());
+            summ=summ.add(product2.getPrice());
         }
         return summ;
     }
