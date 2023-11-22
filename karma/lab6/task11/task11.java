@@ -14,17 +14,16 @@ public class task11 {
         feastManager.addChef("Повар 1", Arrays.asList(dish1, dish2));
         feastManager.addChef("Повар 2", Arrays.asList(dish2, dish3));
 
-        List<String> availableIngredients = Arrays.asList("салат", "курица", "помидоры");
+        List<String> notAvailableIngredients = Arrays.asList("салат", "курица", "помидоры");
         int maxDishes = 2;
-        List<Dish> menu = feastManager.generateMenu(availableIngredients, maxDishes);
+        List<Dish> menu = feastManager.generateMenu(notAvailableIngredients, maxDishes);
+        List<Dish> finalMenu = feastManager.filterMenu(menu);
 
         // Вывод сгенерированного меню
         System.out.println("Generated Menu:");
-        for (Dish dish : menu) {
+        for (Dish dish : finalMenu) {
             System.out.println(dish.getName());
         }
-
-        //todo фильтрация меню
 
         // Удаление повара и его блюд
         feastManager.removeChef("Повар 1");
