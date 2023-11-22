@@ -16,11 +16,11 @@ public class MenuPlanner {
         chefDishesMap.remove(chef);
     }
 
-    public List<Dish> generateMenu(List<String> availableIngredients, int maxDishes) {
+    public List<Dish> generateMenu(List<String> notAvailableIngredients, int maxDishes) {
         List<Dish> possibleDishes = new ArrayList<>();
         for (List<Dish> dishes : chefDishesMap.values()) {
             for (Dish dish : dishes) {
-                if (dish.getIngredients().containsAll(availableIngredients)) {
+                if (!dish.getIngredients().contains(notAvailableIngredients)) {
                     possibleDishes.add(dish);
                 }
             }
@@ -35,5 +35,16 @@ public class MenuPlanner {
         return possibleDishes.subList(0, Math.min(maxDishes, possibleDishes.size()));
     }
 
-    //todo фильтрация готового меню
+    public List<Dish> filterMenu(List<Dish> possibleDishs){
+        Set<Dish> uniqueSet = new HashSet<>();
+        List<Dish> todayMenu = new ArrayList<>();
+
+        for (Dish dish : possibleDishs){
+            if (!uniqueSet.contains(dish)){
+                uniqueSet.add(dish);
+                todayMenu.add(dish);
+            }
+        }
+        return todayMenu;
+    }
 }
